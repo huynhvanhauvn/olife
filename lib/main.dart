@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:olife/blocs/city_bloc.dart';
 import 'package:olife/blocs/setting_bloc.dart';
 import 'package:olife/blocs/theme_bloc.dart';
 import 'package:olife/blocs/weather_bloc.dart';
@@ -20,6 +21,9 @@ void main() {
       ),
       BlocProvider<SettingBloc>(
         create: (context) => SettingBloc(),
+      ),
+      BlocProvider<CityBloc>(
+        create: (context) => CityBloc(repository: weatherRepository),
       )
     ],
     child: MyApp(

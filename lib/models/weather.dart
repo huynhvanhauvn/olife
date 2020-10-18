@@ -52,14 +52,14 @@ class Weather extends Equatable {
   factory Weather.fromJson(dynamic jsonObject) {
     final consolidatedWeather = jsonObject['consolidated_weather'][0];
     return Weather(
-      weatherCondition: _mapStringToWeatherCondition(consolidatedWeather['weather_state_abbr']) ?? '',
-      formattedCondition: consolidatedWeather['weather_state_name'] ?? '',
-      temp: consolidatedWeather['the_temp'] as double,
-      maxTemp: consolidatedWeather['max_temp'] as double,
-      locationId: jsonObject['woeid'] as int,
-      created: consolidatedWeather['created'],
-      lastUpdated: DateTime.now(),
-      location: jsonObject['title']
+        weatherCondition: _mapStringToWeatherCondition(consolidatedWeather['weather_state_abbr']) ?? '',
+        formattedCondition: consolidatedWeather['weather_state_name'] ?? '',
+        temp: consolidatedWeather['the_temp'] as double,
+        maxTemp: consolidatedWeather['max_temp'] as double,
+        locationId: jsonObject['woeid'] as int,
+        created: consolidatedWeather['created'],
+        lastUpdated: DateTime.now(),
+        location: jsonObject['title']
     );
   }
 

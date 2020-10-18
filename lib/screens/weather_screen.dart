@@ -10,6 +10,7 @@ import 'package:olife/screens/search_screen.dart';
 import 'package:olife/screens/setting_screen.dart';
 import 'package:olife/states/theme_state.dart';
 import 'package:olife/states/weather_state.dart';
+import 'package:olife/widgets/temperature_widget.dart';
 
 class WeatherScreen extends StatefulWidget {
   @override
@@ -56,7 +57,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
           listener: (context, weatherState) {
             if (weatherState is WeatherStateSuccess) {
               BlocProvider.of<ThemeBloc>(context).add(ThemeEventWeatherChange(
-                  weatherCondition: weatherState.weather.weatherCondition));
+                  weatherCondition: weatherState.weathers[0].weatherCondition));
             }
             _completer?.complete();
             _completer = Completer();
@@ -68,7 +69,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
               );
             }
             if (weatherState is WeatherStateSuccess) {
-              final weather = weatherState.weather;
+              final weather = weatherState.weathers[0];
               return BlocBuilder<ThemeBloc, ThemeState>(
                 builder: (context, themState) {
                   return RefreshIndicator(
@@ -91,6 +92,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   color: themState.textColor,
                                 ),
                               ),
+                              TemperatureWidget(weather: weather),
                             ],
                           )
                         ],

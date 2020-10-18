@@ -17,16 +17,17 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     if(event is WeatherEventRequest) {
       yield WeatherStateLoading();
       try {
-        final Weather weather = await weatherRepository.getWeatherFromCity(event.city);
-        yield WeatherStateSuccess(weather: weather);
+        final List<Weather> weathers = await weatherRepository.getWeatherFromCity(event.city);
+        yield WeatherStateSuccess(weathers: weathers);
       } catch(exception) {
         yield WeatherStateFailure();
       }
     } else if(event is WeatherEventRefresh) {
       yield WeatherStateLoading();
       try {
-        final Weather weather = await weatherRepository.getWeatherFromCity(event.city);
-        yield WeatherStateSuccess(weather: weather);
+        final List<Weather> weathers = await weatherRepository.getWeatherFromCity(event.city);
+        print(weathers);
+        yield WeatherStateSuccess(weathers: weathers);
       } catch(exception) {
         yield WeatherStateFailure();
       }
